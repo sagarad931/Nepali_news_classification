@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+            @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;   
+        }
+       .container .text{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .container{
+            background: #b5c9f3;
+            width: 410px;
+            padding: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 10px 20px 30px rgba(53, 51, 51, 0.466);
+        }
+       
+     .container .data{
+            height: 45px;
+            width: 100%;
+            margin: 40px 0;
+            
+        }
+     form .data label{
+           font-size: 18px;
+        }
+     form .data input{
+            height: 100%;
+            width: 100%;
+            padding-left: 10px;
+            font-size: 17px;
+            border: 1px solid silver;
+            border-end-end-radius: 10px;
+            
+        }
+     form .data input:focus{
+            border-color: #2995dd;
+            border-bottom-width: 2px;
+        }
+
+     form .signup-link{
+            text-align: center;
+        }
+     form .signup-link a{
+            color: #279eee;
+            text-decoration: none;
+        }
+     form .signup-link a:hover{
+            text-decoration: underline;
+        }
+
+    form div .btn{
+        text-align: center;
+    }
+
+    input[type="submit" i]{
+        width: 100%;
+        height: 40px;
+        border: none;
+        font-size: large;
+        cursor: pointer;
+        background: hsl(224, 89%, 60%);
+        color: white;
+        outline: none;
+        letter-spacing: 2px;
+    }
+
+    
+    input[type="submit" i]:hover{
+        background: hsl(224, 100%, 54%);
+    }
+
+        
+    </style>
+</head>
+
+<body>
+    
+    <form method="POST" action="">
+        <div class="container">
+            <div class="text">
+                Login Form
+             </div>
+
+        {{ form.hidden_tag() }}
+
+        <div class="data">
+            <label>Username</label>
+            {{ form.username }}
+        </div>
+        <div class="data">
+            <label>Password</label>
+            {{ form.password }}
+        </div>
+        <br>
+        <div class="btn">
+            {{ form.submit }} 
+          
+        </div>
+      
+        <br>
+        <div class="signup-link">
+            Don't have an account? <a href="{{ url_for('register') }}">  Sign up</a>
+         </div>
+
+    </div>
+    </form>
+
+    </body>
+
+</html>
