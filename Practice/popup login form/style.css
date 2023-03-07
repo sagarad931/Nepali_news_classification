@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.show-btn{
+  background: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #3498db;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+.show-btn, .container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* input[type="checkbox"]{
+  display: none;
+} */
+.container{
+  /* display: none; */
+  background: #b5c9f3;
+  width: 410px;
+  padding: 30px;
+  /* box-shadow: 0 0 8px rgba(0,0,0,0.1); */
+  box-shadow: 10px 20px 30px rgba(53, 51, 51, 0.466);
+}
+#show:checked ~ .container{
+  display: block;
+}
+/* .container .close-btn{
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+.container .close-btn:hover{
+  color: #3498db;
+} */
+.container .text{
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.container form{
+  margin-top: -20px;
+}
+.container form .data{
+  height: 45px;
+  width: 100%;
+  margin: 40px 0;
+}
+form .data label{
+  font-size: 18px;
+}
+form .data input{
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  border: 1px solid silver;
+}
+form .data input:focus{
+  border-color: #3498db;
+  border-bottom-width: 2px;
+}
+form .btn{
+  margin: 30px 0;
+  height: 45px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+form .btn button{
+  height: 100%;
+  width: 100%;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: #4dacc4;
+}
+form .btn button:hover{
+    background: #0bceff;
+  }
+form .signup-link{
+  text-align: center;
+}
+form .signup-link a{
+  color: #279eee;
+  text-decoration: none;
+}
+form .signup-link a:hover{
+  text-decoration: underline;
+}
