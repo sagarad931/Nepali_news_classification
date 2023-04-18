@@ -5,6 +5,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
+import pickle
+import sklearn
+import numpy as np
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
@@ -27,8 +30,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
-
-
+    
 class RegisterForm(FlaskForm):
     username = StringField(validators=[
                              InputRequired(), Length(min=4, max=20)])
@@ -100,6 +102,60 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form)
+
+
+
+
+# Load the pickled model
+with open('news_pred_vectorizer.pickle', 'rb') as handle:
+    vectorizer = pickle.load(handle)
+
+with open('news_pred_model.pickle','rb') as handle:
+    model=pickle.load(handle)
+
+# @app.route('/home')
+# def index():
+#     return render_template('home.html')
+
+@app.route('/predict', methods=['GET','POST'])
+def predict():
+  
+    name  = request.form['data'].encode('utf-8').decode('utf-8')
+    # name = np.array([name]).reshape(-1, 1)
+
+    classes= {'Agriculture': 0,
+                'automobiles': 1,
+                'bank': 2,
+                'business': 3,
+                'economy': 4,
+                'education': 5,
+                'entertainment': 6,
+                'health': 7,
+                'politics': 8,
+                'sports': 9,
+                'technology': 10,
+                'tourism': 11,
+                'world': 12}
+
+    prd = model.predict(vectorizer.transform(
+    [
+      name
+    ])
+            ) 
+    nprd = []
+    for k,v in classes.items():
+        for p in prd:
+            if v==p:
+                nprd.append(k)
+
+
+    # Render a template with the prediction
+    return render_template('dashboard.html', prediction=nprd[0])
+
+
+
+
+
 
 
 if __name__ == "__main__":

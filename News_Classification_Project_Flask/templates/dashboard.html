@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 </head>
-
+ 
 <body>
     <h1>Hello you are logged in.</h1>
    
@@ -66,9 +66,9 @@
             <!--===== HOME =====-->
             <section class="home bd-grid" id="home">
                 <div class="home__data">
-                    <h1 class="home__title">Hey,<br><span class="home__title-color">Classify Your News</span><br>With Us</h1>
+                    <h1 class="home__title">Hi, {{ username }}<br><span class="home__title-color">Classify Your News</span><br>Here</h1>
 
-                    <a href="#" class="button">Click Here</a>
+                    <a href="#" class="button">Click me</a>
                 </div>
 
                 <!-- <div class="home__social">
@@ -87,7 +87,7 @@
                             <image class="home__blob-img" x="50" y="60" href="assets/img/News/pic_ (3).jpg"/>
                         </g>
                     </svg> -->
-                    <img src="/static/img/pic_ (3).jpg" alt="">
+                    <img src="/static/img/pic_ (5).jpg" alt="">
                 </div>
             </section>
 
@@ -220,7 +220,7 @@
                 </div>
             </section>
 
-            <!--===== CONTACT =====-->
+            <!-- ===== CONTACT =====
             <section class="contact section" id="contact">
                 <h2 class="section-title">Contact</h2>
 
@@ -229,13 +229,46 @@
                         <input type="text" placeholder="Name" class="contact__input">
                         <input type="mail" placeholder="Email" class="contact__input">
                         <textarea name="" placeholder="Your Message" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <!-- <input type="button" value="Enviar" class="contact__button button"> -->
                         <button class="contact__button button">Submit</button>
+                        
+                    </form>
+                </div>
+            </section> -->
+
+            <section class="Predict section" id="predict">
+                <h2 class="section-title">Predict</h2>
+
+                <div class="contact__container bd-grid">
+                    <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8">
+                        <label for="label" class="contact__input">Enter your news:</label>
+                        <br>
+                        <br> 
+                        <input type="text" class="contact__input" id="data" name="data">
+                        <!-- <textarea name="data" placeholder="Here..." id="data" cols="10" rows="15" class="contact__input"></textarea>  -->
+                        <input type="submit" class="contact__button button" value="Predict"></input>
+                        <p>{{ prediction }}</p>
                         
                     </form>
                 </div>
             </section>
         </main>
+
+         
+        <!-- <form method="POST" action="/predict">
+            <label for="name">Enter your news:</label>
+            <input type="textarea" id="name" name="name">
+            <input type="submit" value="Predict"> -->
+        </form>
+
+
+
+
+
+
+
+
+
+
 
         <!--===== FOOTER =====-->
         <footer class="footer">
