@@ -1,1 +1,1 @@
-# This is the Flask app for the Nepali News Classification!!
+# Nepali News Classification implementing Multinomial Naive Bayes Algorithm

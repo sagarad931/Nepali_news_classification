@@ -6,7 +6,7 @@
 
         <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
+  
         <!-- =====BOX ICONS===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
@@ -26,6 +26,8 @@
                         <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                         <li class="nav__item"><a href="#catogery" class="nav__link">Catogery</a></li>
                         <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+
+                        
                         <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li>
                     </ul>
                 </div>
@@ -42,7 +44,7 @@
                 <div class="home__data">
                     <h1 class="home__title">Hey,<br><span class="home__title-color">Classify Your News</span><br>With Us</h1>
 
-                    <a href="#" class="button">Click Here</a>
+                    <a href="{{url_for('dashboard') }}" class="button">Click Here</a>
                 </div>
 
                 <!-- <div class="home__social">

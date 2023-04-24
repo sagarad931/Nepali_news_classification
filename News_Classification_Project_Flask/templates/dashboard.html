@@ -1,22 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
- 
-<body>
-    <h1>Hello you are logged in.</h1>
-   
-    <button>
-        <a href="{{url_for('logout')}}" style="text-decoration: none;">Logout</a>
-    </button>
-</body>
-
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,6 +11,7 @@
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
         <title>News Classification</title>
+    
     </head>
     <body>
         <!--===== HEADER =====-->
@@ -44,7 +26,7 @@
                         <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
                         <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                         <li class="nav__item"><a href="#catogery" class="nav__link">Catogery</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                        <!-- <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li> -->
                         <!-- <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li> -->
 
                         <li class="nav__item" style="color: hsl(224, 89%, 60%)
@@ -68,7 +50,7 @@
                 <div class="home__data">
                     <h1 class="home__title">Hi, {{ username }}<br><span class="home__title-color">Classify Your News</span><br>Here</h1>
 
-                    <a href="#" class="button">Click me</a>
+                    <a href="#predict_section" class="button">Click me</a>
                 </div>
 
                 <!-- <div class="home__social">
@@ -78,15 +60,7 @@
                 </div> -->
 
                 <div class="home__img">
-                    <!-- <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="assets/img/News/pic_ (3).jpg"/>
-                        </g>
-                    </svg> -->
+                    
                     <img src="/static/img/pic_ (5).jpg" alt="">
                 </div>
             </section>
@@ -109,70 +83,7 @@
                 </div>
             </section>
 
-            <!--===== SKILLS =====-->
-            <!-- <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
-
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Profesional Skills</h2>
-                        <p class="skills__text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit optio id vero amet, alias architecto consectetur error eum eaque sit.</p>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-html5 skills__icon'></i>
-                                <span class="skills__name">HTML5</span>
-                            </div>
-                            <div class="skills__bar skills__html">
-
-                            </div>
-                            <div>
-                                <span class="skills__percentage">95%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-css3 skills__icon'></i>
-                                <span class="skills__name">CSS3</span>
-                            </div>
-                            <div class="skills__bar skills__css">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">85%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxl-javascript skills__icon' ></i>
-                                <span class="skills__name">JAVASCRIPT</span>
-                            </div>
-                            <div class="skills__bar skills__js">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">65%</span>
-                            </div>
-                        </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">UX/UI</span>
-                            </div>
-                            <div class="skills__bar skills__ux">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">85%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>              
-                        <img src="assets/img/work3.jpg" alt="" class="skills__img">
-                    </div>
-                </div>
-            </section> -->
-
+           
             <!--===== WORK =====-->
             <section class="catogery section" id="catogery">
                 <h2 class="section-title">Catogery</h2>
@@ -220,55 +131,30 @@
                 </div>
             </section>
 
-            <!-- ===== CONTACT =====
-            <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
-
-                <div class="contact__container bd-grid">
-                    <form action="" class="contact__form">
-                        <input type="text" placeholder="Name" class="contact__input">
-                        <input type="mail" placeholder="Email" class="contact__input">
-                        <textarea name="" placeholder="Your Message" id="" cols="0" rows="10" class="contact__input"></textarea>
-                        <button class="contact__button button">Submit</button>
-                        
-                    </form>
-                </div>
-            </section> -->
-
-            <section class="Predict section" id="predict">
+            <section class="Predict section" id="predict_section">
                 <h2 class="section-title">Predict</h2>
 
                 <div class="contact__container bd-grid">
-                    <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8">
-                        <label for="label" class="contact__input">Enter your news:</label>
+                    <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8" id="myForm">
+                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Enter your news:</label>
                         <br>
                         <br> 
-                        <input type="text" class="contact__input" id="data" name="data">
-                        <!-- <textarea name="data" placeholder="Here..." id="data" cols="10" rows="15" class="contact__input"></textarea>  -->
-                        <input type="submit" class="contact__button button" value="Predict"></input>
-                        <p>{{ prediction }}</p>
+                        <!-- <input type="text" class="contact__input" id="data" name="data"> -->
+                        <textarea name="data" placeholder="Here..." id="data" rows="15" cols="1" class="contact__input"></textarea> 
+                        <input type="button" class="contact__button button" onclick="submitForm();" value="Predict">
+                        <br>
+
+                        <p id="error_msg"></p>
+                                                
+                        <p style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;">{{ prediction }}</p>
+                        <span style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;" id="prediction"></span>
                         
+                    
                     </form>
                 </div>
             </section>
         </main>
-
-         
-        <!-- <form method="POST" action="/predict">
-            <label for="name">Enter your news:</label>
-            <input type="textarea" id="name" name="name">
-            <input type="submit" value="Predict"> -->
         </form>
-
-
-
-
-
-
-
-
-
-
 
         <!--===== FOOTER =====-->
         <footer class="footer">
@@ -279,13 +165,60 @@
             </div>
             <p class="footer__copy">&#169; Copyright 2023. All rigths reserved</p>
         </footer>
+         
+       <script>
+            function submitForm() {
+                // alert("Called");
+                
+                var x = document.forms["myForm"]["data"].value;
+                if (x == "") {
 
+                    document.getElementById("prediction").innerHTML = "Please fill out the required field";
+                    
+                    return false;
 
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
+                    // alert("Please fill out the required field");
+                    // return false;
+                }
+                 
+                else if (/^[A-Za-z0-9]+$/.test(x)) {
+                var errorMsg = document.getElementById("prediction");
+                errorMsg.innerHTML = "Please enter a nepali word";
+                return false;
+                 }
+                 else if (/[!#$%^&*(){\}+\-/]/.test(x)) {
+                var errorMsg = document.getElementById("prediction");
+                errorMsg.innerHTML = "Please remove special characters";
+                return false;
+                }
+                else{
 
-        <!--===== MAIN JS =====-->
-        <!-- <script src="assets/js/main.js"></script> -->
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+                    var form = document.getElementById("myForm");
+                    var formData = new FormData(form);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/predict");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                        var prediction = xhr.responseText;
+                        console.log(typeof(prediction));
+                        prediction=JSON.parse(prediction);
+                        console.log(prediction['data']);
+                        document.getElementById("prediction").innerHTML = prediction['data'];
+
+                    }
+                };
+                xhr.send(formData);
+                return false;
+                } 
+            }
+       </script>
+       <script>
+       </script>
+               <!--===== SCROLL REVEAL =====-->
+               <script src="https://unpkg.com/scrollreveal"></script>
+
+               <!--===== MAIN JS =====-->
+               <!-- <script src="assets/js/main.js"></script> -->
+               <script src="{{ url_for('static', filename='js/main.js') }}"/>   
     </body>
 </html>
