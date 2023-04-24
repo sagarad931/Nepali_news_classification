@@ -181,7 +181,7 @@
                     // return false;
                 }
                  
-                else if (/^[A-Za-z0-9]+$/.test(x)) {
+                else if (/^[A-Za-z0-9\s]+$/.test(x)) {
                 var errorMsg = document.getElementById("prediction");
                 errorMsg.innerHTML = "Please enter a nepali word";
                 return false;
