@@ -4,13 +4,95 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/Favicon.png') }}">
+
+
         <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-        <!-- =====BOX ICONS===== -->
+        <!-- Box icon  -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
         <title>News Classification</title>
+        <style>
+
+               
+
+            .result{
+                background-color:rgb(238, 232, 232);
+                /* display: block; */
+                width: 100%;
+                height: 100px;
+                border: 1.2px solid black;
+                border-radius: 5px;
+            }
+           .contact__container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                
+                }
+                .div1,
+                .div2 {
+                flex-basis: 45%;
+                margin-bottom: 1rem;
+                flex-grow: 1;
+                }
+
+                .div1{
+                padding-left: 80px;
+                }
+
+                
+                .div2 {
+                
+                padding-right: 80px;
+                }
+
+            @media screen and (max-width: 546px) {
+                .contact__container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .div1,
+                .div2 {
+                    flex-basis: 100%;
+                    width: 80%;
+
+                }
+                .div1{
+                padding-left: 0px;
+                }
+            }
+
+
+                @media screen and (max-width: 768px) {
+                .contact__container {
+                    
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .div1,
+                .div2 {
+                    flex-basis: 100%;
+                    width: 80%;
+
+                }
+                .div1{
+                padding-left: 0px;
+                }
+                .div2 {
+                
+                padding-right: 0px;
+                }
+            }
+            
+           
+        </style>
     
     </head>
     <body>
@@ -18,7 +100,11 @@
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div>
-                    <a href="" class="nav__logo"> Nepali News Classification</a>
+                    <a href="#" class="nav__logo">
+                        <img src="/static/img/Favicon.png" alt="Nepali New Classification">
+                        <span>Nepali News Classification</span>
+                      </a>
+                    <!-- <a href="" class="nav__logo"> Nepali News Classification</a> -->
                 </div>
 
                 <div class="nav__menu" id="nav-menu">
@@ -49,21 +135,18 @@
             <section class="home bd-grid" id="home">
                 <div class="home__data">
                     <h1 class="home__title">Hi, {{ username }}<br><span class="home__title-color">Classify Your News</span><br>Here</h1>
-
-                    <a href="#predict_section" class="button">Click me</a>
-                </div>
-
-                <!-- <div class="home__social">
-                    <a href="" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
-                    <a href="" class="home__social-icon"><i class='bx bxl-behance' ></i></a>
-                    <a href="" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                </div> -->
-
-                <div class="home__img">
                     
-                    <img src="/static/img/pic_ (5).jpg" alt="">
+                    <a href="#predict_section" class="button">Click me</a>
+                    
                 </div>
+                    <div class="home__img">
+                        <img src="/static/img/pic_ (5).jpg" alt="">
+                    </div>
+                </div>
+
+                
             </section>
+
 
             <!--===== ABOUT =====-->
             <section class="about section " id="about">
@@ -84,7 +167,7 @@
             </section>
 
            
-            <!--===== WORK =====-->
+            <!--===== Catogery =====-->
             <section class="catogery section" id="catogery">
                 <h2 class="section-title">Catogery</h2>
 
@@ -132,25 +215,44 @@
             </section>
 
             <section class="Predict section" id="predict_section">
-                <h2 class="section-title">Predict</h2>
+                <h2 class="section-title">Classify</h2>
 
                 <div class="contact__container bd-grid">
-                    <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8" id="myForm">
+                    <div class="div1">
+                        <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8" id="myForm">
                         <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Enter your news:</label>
                         <br>
                         <br> 
-                        <!-- <input type="text" class="contact__input" id="data" name="data"> -->
+                       
                         <textarea name="data" placeholder="Here..." id="data" rows="15" cols="1" class="contact__input"></textarea> 
-                        <input type="button" class="contact__button button" onclick="submitForm();" value="Predict">
-                        <br>
+                        <input type="button" class="contact__button button_form" onclick="submitForm();" value="Predict">
+                        <br>    
+                        </form>
 
-                        <p id="error_msg"></p>
-                                                
-                        <p style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;">{{ prediction }}</p>
-                        <span style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;" id="prediction"></span>
+                    </div>
                         
+                                                
+                    <div class="div2">
+                        <br>
+                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Your news belogs to:</label>
+                        <br>
+                        <span id="errorMsg">
+
+                        </span>
+                        <br>
+                        <div class="result">
+
+                        <span style="color: hsl(224, 89%, 60%); font-size:larger; font-size:35px; font-weight: 900;" 
+                               id="prediction"></span>
+                        </div>
+                    </div>
+                        
+                        <!-- <p style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;">{{ prediction }}</p> -->
+
+                         <!-- <input type="text" class="contact__input" id="data" name="data"> -->
+                         
+
                     
-                    </form>
                 </div>
             </section>
         </main>
@@ -166,31 +268,91 @@
             <p class="footer__copy">&#169; Copyright 2023. All rigths reserved</p>
         </footer>
          
+
+
+
+        <!--===== JS functions =====-->
        <script>
             function submitForm() {
                 // alert("Called");
                 
                 var x = document.forms["myForm"]["data"].value;
                 if (x == "") {
-
-                    document.getElementById("prediction").innerHTML = "Please fill out the required field";
                     
-                    return false;
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please fill out the required field</span>";
+                document.getElementById("prediction").style.display = "none";
+
+                return false;
 
                     // alert("Please fill out the required field");
                     // return false;
                 }
-                 
-                else if (/^[A-Za-z0-9\s]+$/.test(x)) {
-                var errorMsg = document.getElementById("prediction");
-                errorMsg.innerHTML = "Please enter a nepali word";
-                return false;
-                 }
-                 else if (/[!#$%^&*(){\}+\-/]/.test(x)) {
-                var errorMsg = document.getElementById("prediction");
-                errorMsg.innerHTML = "Please remove special characters";
+                else if (/[a-zA-Z]/.test(x)) {
+
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("prediction").style.display = "none";
+                // var errorMsg = document.getElementById("prediction");
+                // errorMsg.style.color = "red";
+                // errorMsg.style.fontWeight= "500";
+                // errorMsg.innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("errorMsg").innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("prediction").style.display = "none";
+
+
                 return false;
                 }
+
+                else if (/[0-9]/.test(x)) {
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("prediction").style.display = "none";
+                // var errorMsg = document.getElementById("prediction");
+                // errorMsg.style.color = "red";
+                // errorMsg.style.fontWeight= "500";
+                // errorMsg.innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("errorMsg").innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("prediction").style.display = "none";
+
+                return false;
+                }
+
+                else if (/^[A-Za-z0-9\s]+$/.test(x)) {
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("prediction").style.display = "none";
+                // var errorMsg = document.getElementById("prediction");
+                // errorMsg.style.color = "red";
+                // errorMsg.style.fontWeight= "500";
+                // errorMsg.innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("errorMsg").innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("prediction").style.display = "none";
+
+                return false;
+                }
+    
+                else if (/[!#$%^&*]/.test(x)) {
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("prediction").style.display = "none";
+                // var errorMsg = document.getElementById("prediction");
+                // errorMsg.style.color = "red";
+                // errorMsg.style.fontWeight= "500";
+                // errorMsg.innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("errorMsg").innerHTML = "Please enter a Nepali text only";
+                // document.getElementById("prediction").style.display = "none";
+                return false;
+                }
+
+                else if (x.length < 60) {
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a longer message</span>";
+                document.getElementById("prediction").style.display = "none";
+                // var errorMsg = document.getElementById("prediction");
+                // errorMsg.style.color = "red";
+                // errorMsg.style.fontWeight= "500";
+                // errorMsg.innerHTML = "Please enter a longer message";
+                // document.getElementById("errorMsg").innerHTML = "Please enter a longer message";
+                // document.getElementById("prediction").style.display = "none";
+                return false;
+                }
+               
+
                 else{
 
                     var form = document.getElementById("myForm");
@@ -204,21 +366,30 @@
                         prediction=JSON.parse(prediction);
                         console.log(prediction['data']);
                         document.getElementById("prediction").innerHTML = prediction['data'];
+                        document.getElementById("errorMsg").innerHTML = " ";
 
+                        document.getElementById("prediction").style.display = "block";
+
+                       
                     }
                 };
                 xhr.send(formData);
+                document.getElementById("prediction");
                 return false;
                 } 
             }
        </script>
+
        <script>
+        
        </script>
                <!--===== SCROLL REVEAL =====-->
                <script src="https://unpkg.com/scrollreveal"></script>
 
                <!--===== MAIN JS =====-->
                <!-- <script src="assets/js/main.js"></script> -->
-               <script src="{{ url_for('static', filename='js/main.js') }}"/>   
+               <!-- <script src="{{ url_for('static', filename='js/main.js') }}"/>    -->
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
     </body>
 </html>

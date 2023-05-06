@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
+from model import Multinomial
 
 
 app = Flask(__name__)
@@ -151,7 +152,7 @@ with open('news_pred_vectorizer.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
 
 with open('news_pred_model.pickle','rb') as handle:
-    model= pickle.load(handle)
+    Multinomial = pickle.load(handle)
 
 # @app.route('/home')
 # def index():
@@ -179,7 +180,7 @@ def predict():
                 'tourism': 11,
                 'world': 12}
 
-    prd = model.predict(vectorizer.transform(
+    prd = Multinomial.predict(vectorizer.transform(
     [
       name
     ])
