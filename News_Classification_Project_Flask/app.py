@@ -150,6 +150,8 @@ def home():
 # Load the pickled model
 with open('news_pred_vectorizer.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
+    
+    print(vectorizer)
 
 with open('news_pred_model.pickle','rb') as handle:
     Multinomial = pickle.load(handle)
@@ -167,31 +169,31 @@ def predict():
     name  = request.form['data'].encode('utf-8').decode('utf-8')
 
     classes= {'Agriculture': 0,
-                'automobiles': 1,
-                'bank': 2,
-                'business': 3,
-                'economy': 4,
-                'education': 5,
-                'entertainment': 6,
-                'health': 7,
-                'politics': 8,
-                'sports': 9,
-                'technology': 10,
-                'tourism': 11,
-                'world': 12}
+                'Automobiles': 1,
+                'Bank': 2,
+                'Business': 3,
+                'Economy': 4,
+                'Education': 5,
+                'Entertainment': 6,
+                'Health': 7,
+                'Politics': 8,
+                'Sports': 9,
+                'Technology': 10,
+                'Tourism': 11,
+                'World': 12}
 
     prd = Multinomial.predict(vectorizer.transform(
     [
       name
     ])
-            ) 
+    ) 
     nprd = []
     for k,v in classes.items():
         for p in prd:
             if v==p:
                 nprd.append(k)
 
-
+    
     # Render a template with the prediction
     # return render_template('dashboard.html', prediction=nprd[0],username=current_user.username)
     return jsonify({'data':nprd[0]})
