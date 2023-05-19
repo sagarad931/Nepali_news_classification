@@ -1,5 +1,5 @@
 import pickle
-from flask import Flask, render_template, url_for, redirect, request,jsonify
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -7,7 +7,6 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
 from model import Multinomial
-
 
 app = Flask(__name__)
 
@@ -39,16 +38,16 @@ class User(db.Model, UserMixin):
 
 class RegisterForm(FlaskForm):
     firstname = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
     
     lastname = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
     
     email= StringField('email', validators=[
                             InputRequired(), Email(message='Invalid email'), Length(max=50)])
     
     username = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
 
     password = PasswordField(validators=[
                             InputRequired(), Length(min=8, max=20)])
@@ -139,19 +138,14 @@ def logout():
 def dashboard():
     return render_template('dashboard.html' , username=current_user.username)
 
-
-
 @app.route('/')
 def home():
     return render_template('home.html')
-
-
 
 # Load the pickled model
 with open('news_pred_vectorizer.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
     
-    print(vectorizer)
 
 with open('news_pred_model.pickle','rb') as handle:
     Multinomial = pickle.load(handle)
@@ -165,9 +159,10 @@ with open('news_pred_model.pickle','rb') as handle:
 def predict():
   
     print(request.form)
+    print(vectorizer)
 
     name  = request.form['data'].encode('utf-8').decode('utf-8')
-
+    
     classes= {'Agriculture': 0,
                 'Automobiles': 1,
                 'Bank': 2,
