@@ -1,5 +1,5 @@
 import pickle
-from flask import Flask, render_template, url_for, redirect, request,jsonify
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -7,7 +7,6 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
 from model import Multinomial
-
 
 app = Flask(__name__)
 
@@ -39,16 +38,16 @@ class User(db.Model, UserMixin):
 
 class RegisterForm(FlaskForm):
     firstname = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
     
     lastname = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
     
     email= StringField('email', validators=[
                             InputRequired(), Email(message='Invalid email'), Length(max=50)])
     
     username = StringField(validators=[
-                            InputRequired(), Length(min=4, max=20)])
+                            InputRequired(), Length(min=3, max=20)])
 
     password = PasswordField(validators=[
                             InputRequired(), Length(min=8, max=20)])
@@ -139,17 +138,14 @@ def logout():
 def dashboard():
     return render_template('dashboard.html' , username=current_user.username)
 
-
-
 @app.route('/')
 def home():
     return render_template('home.html')
 
-
-
 # Load the pickled model
 with open('news_pred_vectorizer.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
+    
 
 with open('news_pred_model.pickle','rb') as handle:
     Multinomial = pickle.load(handle)
@@ -163,35 +159,36 @@ with open('news_pred_model.pickle','rb') as handle:
 def predict():
   
     print(request.form)
+    print(vectorizer)
 
     name  = request.form['data'].encode('utf-8').decode('utf-8')
-
+    
     classes= {'Agriculture': 0,
-                'automobiles': 1,
-                'bank': 2,
-                'business': 3,
-                'economy': 4,
-                'education': 5,
-                'entertainment': 6,
-                'health': 7,
-                'politics': 8,
-                'sports': 9,
-                'technology': 10,
-                'tourism': 11,
-                'world': 12}
+                'Automobiles': 1,
+                'Bank': 2,
+                'Business': 3,
+                'Economy': 4,
+                'Education': 5,
+                'Entertainment': 6,
+                'Health': 7,
+                'Politics': 8,
+                'Sports': 9,
+                'Technology': 10,
+                'Tourism': 11,
+                'World': 12}
 
     prd = Multinomial.predict(vectorizer.transform(
     [
       name
     ])
-            ) 
+    ) 
     nprd = []
     for k,v in classes.items():
         for p in prd:
             if v==p:
                 nprd.append(k)
 
-
+    
     # Render a template with the prediction
     # return render_template('dashboard.html', prediction=nprd[0],username=current_user.username)
     return jsonify({'data':nprd[0]})

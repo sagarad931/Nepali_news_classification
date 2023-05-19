@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Meta tag -->
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
+        <!-- Favicon -->
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/Favicon.png') }}">
 
 
@@ -14,10 +16,8 @@
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
         <title>News Classification</title>
+
         <style>
-
-               
-
             .result{
                 background-color:rgb(238, 232, 232);
                 /* display: block; */
@@ -90,13 +90,12 @@
                 padding-right: 0px;
                 }
             }
-            
-           
         </style>
     
+
     </head>
     <body>
-        <!--===== HEADER =====-->
+        <!-- HEADER -->
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div>
@@ -119,23 +118,22 @@
                         ;">Welcome, {{username}}</li>
 
                         <li class="nav__item"><a href="{{ url_for('logout') }}" class="nav__link">Logout</a></li>
-                        
 
                     </ul>
                 </div>
-
                 <div class="nav__toggle" id="nav-toggle">
                     <i class='bx bx-menu'></i>
                 </div>
             </nav>
         </header>
 
+
         <main class="l-main">
-            <!--===== HOME =====-->
+            <!-- HOME -->
             <section class="home bd-grid" id="home">
                 <div class="home__data">
                     <h1 class="home__title">Hi, {{ username }}<br><span class="home__title-color">Classify Your News</span><br>Here</h1>
-                    
+
                     <a href="#predict_section" class="button">Click me</a>
                     
                 </div>
@@ -143,12 +141,10 @@
                         <img src="/static/img/pic_ (5).jpg" alt="">
                     </div>
                 </div>
-
-                
             </section>
 
 
-            <!--===== ABOUT =====-->
+            <!-- ABOUT -->
             <section class="about section " id="about">
                 <h2 class="section-title">About Us</h2>
 
@@ -161,15 +157,16 @@
                         <h2 class="about__subtitle">Nepali News Classification </h2>
                         <p class="about__text">This is a Platform where you can easily classify your Nepali news. Here you can find your news in different catogery
                             like Technology, Politics, Business, Health, Politics and many more. As we process only the Nepali News for this time 
-                            but we are planning to use it for different language news. </p>           
+                            but we are planning to use it for different language news. 
+                        </p>           
                     </div>                                   
                 </div>
             </section>
 
            
-            <!--===== Catogery =====-->
+            <!-- Catogery -->
             <section class="catogery section" id="catogery">
-                <h2 class="section-title">Catogery</h2>
+                <h2 class="section-title">Category</h2>
 
                 <div class="work__container bd-grid">
 
@@ -220,45 +217,38 @@
                 <div class="contact__container bd-grid">
                     <div class="div1">
                         <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8" id="myForm">
-                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Enter your news:</label>
-                        <br>
-                        <br> 
-                       
-                        <textarea name="data" placeholder="Here..." id="data" rows="15" cols="1" class="contact__input"></textarea> 
-                        <input type="button" class="contact__button button_form" onclick="submitForm();" value="Classify">
-                        <br>    
+                            <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Enter your news:</label>
+                            <br>
+                            <br> 
+                            <textarea name="data" placeholder="Here..." id="data" rows="15" cols="1" class="contact__input"></textarea> 
+                            <input type="button" class="contact__button button_form" onclick="submitForm();" value="Classify">
+                            <br>    
                         </form>
-
                     </div>
-                        
                                                 
                     <div class="div2">
                         <br>
-                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Your news belogs to:</label>
+                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Your news belongs to:</label>
                         <br>
                         <span id="errorMsg">
 
                         </span>
                         <br>
                         <div class="result">
-
-                        <span style="color: hsl(224, 89%, 60%); font-size:larger; font-size:35px; font-weight: 900;" 
+                            <span style="color: hsl(224, 89%, 60%); font-size:larger; font-size:35px; font-weight: 900;" 
                                id="prediction"></span>
                         </div>
                     </div>
-                        
                         <!-- <p style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;">{{ prediction }}</p> -->
 
                          <!-- <input type="text" class="contact__input" id="data" name="data"> -->
-                         
-
                     
                 </div>
             </section>
         </main>
         </form>
 
-        <!--===== FOOTER =====-->
+        <!-- FOOTER -->
         <footer class="footer">
             <div class="footer__social">
                 <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
@@ -271,7 +261,7 @@
 
 
 
-        <!--===== JS functions =====-->
+        <!-- JS functions -->
        <script>
             function submitForm() {
                 // alert("Called");
@@ -289,7 +279,7 @@
                 }
                 else if (/[a-zA-Z]/.test(x)) {
 
-                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter Nepali text only</span>";
                 document.getElementById("prediction").style.display = "none";
                 // var errorMsg = document.getElementById("prediction");
                 // errorMsg.style.color = "red";
@@ -303,7 +293,7 @@
                 }
 
                 else if (/[0-9]/.test(x)) {
-                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter Nepali text only</span>";
                 document.getElementById("prediction").style.display = "none";
                 // var errorMsg = document.getElementById("prediction");
                 // errorMsg.style.color = "red";
@@ -316,7 +306,7 @@
                 }
 
                 else if (/^[A-Za-z0-9\s]+$/.test(x)) {
-                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter Nepali text only</span>";
                 document.getElementById("prediction").style.display = "none";
                 // var errorMsg = document.getElementById("prediction");
                 // errorMsg.style.color = "red";
@@ -329,7 +319,7 @@
                 }
     
                 else if (/[!#$%^&*]/.test(x)) {
-                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter a Nepali text only</span>";
+                document.getElementById("errorMsg").innerHTML = "<span style='color:red; font-weight:100'>Please enter Nepali text only</span>";
                 document.getElementById("prediction").style.display = "none";
                 // var errorMsg = document.getElementById("prediction");
                 // errorMsg.style.color = "red";
@@ -384,12 +374,15 @@
         
        </script>
                <!--===== SCROLL REVEAL =====-->
+               <!-- Importing the ScrollReveal library which enables to create scroll animations and effects on elements on webpage. -->
                <script src="https://unpkg.com/scrollreveal"></script>
 
                <!--===== MAIN JS =====-->
                <!-- <script src="assets/js/main.js"></script> -->
+
                <!-- <script src="{{ url_for('static', filename='js/main.js') }}"/>    -->
-        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+               <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     </body>
 </html>
