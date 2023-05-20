@@ -7,12 +7,19 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
 from model import Multinomial
+from preprocessor import preprocess_text, stop_words,punctuation_words
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+import secrets
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecretkey'
+
+# secretkey for admin 
+secret_key = secrets.token_hex(16)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -142,6 +149,20 @@ def dashboard():
 def home():
     return render_template('home.html')
 
+
+
+# For admin page 
+admin = Admin(app)
+class UserAdminView(ModelView):
+    column_list = ('username', 'email')
+    column_searchable_list = ('username', 'email')
+admin.add_view(UserAdminView(User, db.session))
+@app.route('/admin')
+@login_required
+def admin_panel():
+    return redirect(admin.url)
+
+
 # Load the pickled model
 with open('news_pred_vectorizer.pickle', 'rb') as handle:
     vectorizer = pickle.load(handle)
@@ -157,9 +178,8 @@ with open('news_pred_model.pickle','rb') as handle:
 @app.route('/predict', methods=['GET','POST'])
 @login_required
 def predict():
-  
-    print(request.form)
-    print(vectorizer)
+    print("Data Entered in form is:",request.form)
+    # print(vectorizer)
 
     name  = request.form['data'].encode('utf-8').decode('utf-8')
     
@@ -176,19 +196,35 @@ def predict():
                 'Technology': 10,
                 'Tourism': 11,
                 'World': 12}
-
-    prd = Multinomial.predict(vectorizer.transform(
-    [
-      name
-    ])
-    ) 
-    nprd = []
-    for k,v in classes.items():
-        for p in prd:
-            if v==p:
-                nprd.append(k)
-
     
+    # preprocess_name= preprocess_text(name,stop_words, punctuation_words)
+
+    # print(preprocess_name)
+    
+    preprocess_name = preprocess_text(name, stop_words, punctuation_words)
+    preprocess_name = preprocess_name[0]  # Extract the single preprocessed document
+
+    if len(preprocess_name) == 0:
+        print("Preprocessed Data is empty")
+    else:
+        print("Preprocessed data is :",preprocess_name)
+    
+    # Vectorizer use
+    prd = Multinomial.predict(vectorizer.transform([preprocess_name]))
+    # Finding the category
+    nprd = [k for k, v in classes.items() if v == prd[0]]
+
+    # prd = Multinomial.predict(vectorizer.transform(
+    # [
+    #     name
+    # ])
+    # ) 
+    # nprd = []
+    # for k,v in classes.items():
+    #     for p in prd:
+    #         if v==p:
+    #             nprd.append(k)
+
     # Render a template with the prediction
     # return render_template('dashboard.html', prediction=nprd[0],username=current_user.username)
     return jsonify({'data':nprd[0]})
