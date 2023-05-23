@@ -226,6 +226,9 @@ img {
   background-color: var(--first-color);
 }
 
+.show {
+  right: 0;
+}
 
 
 

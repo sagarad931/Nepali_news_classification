@@ -8,12 +8,21 @@ from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
 from model import Multinomial
 from preprocessor import preprocess_text, stop_words,punctuation_words
+<<<<<<< HEAD
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+import secrets
+=======
+>>>>>>> 3d8a5c5fc9903d7aa9c89bd243eb56742c5a74b8
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecretkey'
+
+# secretkey for admin 
+secret_key = secrets.token_hex(16)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -142,6 +151,20 @@ def dashboard():
 @app.route('/')
 def home():
     return render_template('home.html')
+
+
+
+# For admin page 
+admin = Admin(app)
+class UserAdminView(ModelView):
+    column_list = ('username', 'email')
+    column_searchable_list = ('username', 'email')
+admin.add_view(UserAdminView(User, db.session))
+@app.route('/admin')
+@login_required
+def admin_panel():
+    return redirect(admin.url)
+
 
 # Load the pickled model
 with open('news_pred_vectorizer.pickle', 'rb') as handle:
