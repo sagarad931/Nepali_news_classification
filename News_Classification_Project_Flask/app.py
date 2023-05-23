@@ -7,13 +7,10 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_bcrypt import Bcrypt
 from model import Multinomial
-from preprocessor import preprocess_text, stop_words,punctuation_words
-<<<<<<< HEAD
 from flask_admin import Admin
+from preprocessor import preprocess_text, stop_words,punctuation_words
 from flask_admin.contrib.sqla import ModelView
 import secrets
-=======
->>>>>>> 3d8a5c5fc9903d7aa9c89bd243eb56742c5a74b8
 
 app = Flask(__name__)
 
