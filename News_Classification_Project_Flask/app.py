@@ -152,21 +152,15 @@ def home():
 
 
 # For admin page 
+admin = Admin(app)
 class UserAdminView(ModelView):
     column_list = ('username', 'email')
     column_searchable_list = ('username', 'email')
-
-admin = Admin(app, name='Admin')
-
 admin.add_view(UserAdminView(User, db.session))
-
 @app.route('/admin')
 @login_required
 def admin_panel():
-      if current_user.username == 'admin':
-        return redirect(admin.url)
-      else:
-        return redirect(url_for('dashboard'))
+    return redirect(admin.url)
 
 
 # Load the pickled model
