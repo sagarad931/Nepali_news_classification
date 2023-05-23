@@ -102,9 +102,6 @@ img {
   padding-bottom: 2rem;
 }
 
-
-
-
 /*===== LAYOUT =====*/
 .bd-grid {
   max-width: 1024px;
@@ -169,7 +166,6 @@ img {
     top: var(--header-height);
     right: -100%;
     width: 80%;
-    height: 100%;
     padding: 2rem;
     background-color: var(--second-color);
     transition: .5s;
@@ -187,7 +183,7 @@ img {
 
 .nav__link:hover {
   position: relative;
-}
+} 
 
 .nav__link:hover::after {
   position: absolute;
@@ -214,7 +210,6 @@ img {
 
 
 
-
 /*Active menu*/
 .active::after {
   position: absolute;
@@ -226,7 +221,9 @@ img {
   background-color: var(--first-color);
 }
 
-
+.show {
+  right: 0;
+}
 
 
 /*===== HOME =====*/

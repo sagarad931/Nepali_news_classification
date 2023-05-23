@@ -47,4 +47,4 @@ def preprocess_text(cat_data, stop_words, punctuation_words):
     new_cat.append(nwords.strip())
 
     return new_cat
-print(preprocess_text([" संघ खारेजीले अन्योल र अनिश्चितता मात्रै"],stop_words, punctuation_words))
+print(preprocess_text([],stop_words, punctuation_words))
