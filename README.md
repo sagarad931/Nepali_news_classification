@@ -3,3 +3,6 @@ This is our 7th Semester Project. This project is about news classifier which on
 
 
 Here is the website for this project: https://sagarad.pythonanywhere.com/
+
+![Image description](/preview.png)
+
