@@ -11,15 +11,15 @@ from flask_admin import Admin
 from preprocessor import preprocess_text, stop_words,punctuation_words
 from flask_admin.contrib.sqla import ModelView
 import secrets
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+import secrets
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecretkey'
-
-# secretkey for admin 
-secret_key = secrets.token_hex(16)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -112,7 +112,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     
@@ -130,8 +129,6 @@ def login():
     return render_template('login.html', form=form)
 
 
-
-
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
@@ -139,11 +136,11 @@ def logout():
     return redirect(url_for('home'))
 
 
-
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
     return render_template('dashboard.html' , username=current_user.username)
+
 
 @app.route('/')
 def home():
@@ -170,10 +167,6 @@ with open('news_pred_vectorizer.pickle', 'rb') as handle:
 
 with open('news_pred_model.pickle','rb') as handle:
     Multinomial = pickle.load(handle)
-
-# @app.route('/home')
-# def index():
-#     return render_template('home.html')
 
 @app.route('/predict', methods=['GET','POST'])
 @login_required
