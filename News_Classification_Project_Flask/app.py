@@ -11,6 +11,7 @@ from flask_admin import Admin
 from preprocessor import preprocess_text, stop_words,punctuation_words
 from flask_admin.contrib.sqla import ModelView
 import secrets
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -148,6 +149,33 @@ def dashboard():
 @app.route('/')
 def home():
     return render_template('home.html')
+
+class ContactForm:
+    pass
+
+# For contact
+@app.route('/', methods=["GET", "POST"])
+def get_contact():
+    form = ContactForm()
+    if request.method == 'POST':
+        name = request.form["name"]
+        email = request.form["email"]
+        message = request.form["message"]
+        data = {'name': name, 'email': email,'message': message}
+        df = pd.DataFrame(data, index=[0])
+        
+        # Check if the CSV file exists
+        try:
+            existing_data = pd.read_csv('./contactusMessage.csv')
+            df = pd.concat([existing_data, df], ignore_index=True)
+        except FileNotFoundError:
+            pass
+        
+        df.to_csv('./contactusMessage.csv', index=False)
+        return render_template('home.html')
+    else:
+        return render_template('/', form=form)
+
 
 
 
